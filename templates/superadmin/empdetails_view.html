@@ -1,0 +1,54 @@
+{% extends 'common/base.html' %}
+
+
+{% block content %}
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+<table id="dtBasicExample" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
+
+    <thead>
+        <tr>
+            <th colspan="9" style="text-align:right">
+                <a href="{% url 'QMS:empdetailsform'  %}" class="btn btn-primary btn-sm ">Add</a>
+            </th>
+        </tr>
+        <tr>
+            <th>S.no</th>
+            <th>Employee Code</th>
+            <th>Employee Name</th>
+            <th>Employee Department</th>
+            <th>Employee Position</th>
+            <th>Employee Reporting to</th>
+            <th>Employee Approved by</th>
+            <th>Employee Status</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for details in empdetails %}
+        <tr>
+            <td>{{forloop.counter}}</td>
+            <td>{{ details.emp_code }}</td>
+            <td>{{ details.emp_name }}</td>
+            <td>{{ details.emp_department.department_name }}</td>
+            <td>{{ details.emp_position.emp_posn }}</td>
+            <td>{{ details.emp_reporting_to }}</td>
+            <td>{{ details.emp_approved_by }}</td>
+            <td>{{ details.emp_status }}</td>
+
+            <td>
+                <a href="{% url 'QMS:empdetailsupdate' details.id %}" class="btn btn-warning btn-sm">Edit</a>
+
+                <a href="{% url 'QMS:empdetailsdelete' details.pk %}" class="btn btn-danger btn-sm">Delete</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<a href="{% url 'QMS:homepage' %}" class="btn btn-success">Home</a>
+
+{% endblock %}
+
+
